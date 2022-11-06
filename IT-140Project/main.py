@@ -5,6 +5,7 @@ player = Player()
 
 
 def main():
+    fin = False
     print('\"You are a rogue adventurer searching an abandoned castle for any valuables to sell.')
     print('The barkeep at the local tavern said it was probably full of valuables since nobody dared to go near it'
           ' because of a local legend.')
@@ -13,12 +14,13 @@ def main():
     print('You, not fearing a local superstition, decided this could be a chance to fill your pockets.\"\n')
     player.set_name(input('First off, What is your name?\n'))
     room.set_room(room.name)
-    player_input = input('What do you want to do?\n')
-    if player_input == 'I':
-        Player.grab_item(room.item)
-    else:
-        room.move(player_input)
-        print(room.name)
+    while not fin:
+        player_input = input('What do you want to do?\n')
+        if player_input == 'I':
+            player.grab_item(room.item)
+        else:
+            room.move(player_input)
+            print(room.name)
 
 
 if __name__ == "__main__":
