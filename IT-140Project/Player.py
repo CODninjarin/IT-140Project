@@ -46,3 +46,6 @@ class Player:
         if item == 'Necromancer\'s Note':
             print('The note says: \"I don\'t know what else I can do. I cannot live without you '
                   'my dear wife. My Queen. I will bring you back to me.\"')
+
+    def show_inv(self):
+        print('Inventory: {}'.format(self.inv))

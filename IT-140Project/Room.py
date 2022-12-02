@@ -3,20 +3,27 @@ class Room:
         self.name = name
         self.exits = []
         self.item = ''
-        self.directions = ['w', 'W', 'a', 'A', 's', 'S', 'd', 'D']
+        self.directions = ['W', 'A', 'S', 'D']
         self.map = []
 
+    # Function used to set the current room.
+    # Has one argument, name, which is the name of the room the user is setting.
     def set_room(self, name):
         # Entrance Hall
+        # Has an exit to the North(Entrance Hall)
+        # Has the "Map" item
         if name == 'Entrance Hall':
             self.name = name
             self.exits = ['North']
             self.item = 'Map'
             print('You have entered the castle\'s Entrance Hall.')
             print('There is a doorway to the North.')
+            # Nested statement to check if the player has entered the room. This is in every statement.
             if name not in self.map:
                 print('There appears to be a piece of paper near the next doorway, it may be something helpful.')
         # Entrance Hallway
+        # Has four exits West(Library), South(Entrance Hall), and the North and East are blocked.
+        # Has no item due to it being a hallway.
         if name == 'Entrance Hallway':
             self.name = name
             self.exits = ['North', 'South', 'East', 'West']
@@ -24,6 +31,8 @@ class Room:
             print('You entered the Entrance Hallway. There are doors in all 4 directions, but the East and North')
             print('appear to be blocked be debris.')
         # Library
+        # Has two exits, North(Kitchen) and East(Entrance Hall)
+        # Has one item, "Spell Book"
         if name == 'Library':
             self.name = name
             self.exits = ['North', 'West']
@@ -33,6 +42,8 @@ class Room:
             if name not in self.map:
                 print('One of those Spell Books might come in handy and if not, you could always sell it!')
         # Kitchen
+        # Has two exits, East(Great Hall) and South(Library)
+        # Has one item, "Potions"
         if name == 'Kitchen':
             self.name = name
             self.exits = ['South', 'West']
@@ -42,6 +53,7 @@ class Room:
             if name not in self.map:
                 print('Those Potions might come in handy if you run into whoever made them.')
         # Great Hall
+        # Has four exits, East(Armory), North(Great Hallway)
         if name == 'Great Hall':
             self.name = name
             self.exits = ['North', 'South', 'East', 'West']
@@ -106,16 +118,16 @@ class Room:
     def move(self, direction):
         valid_direction = False
         if direction in self.directions:
-            if direction == 'w' or direction == 'W':
+            if direction == 'W':
                 direction = 'North'
                 valid_direction = True
-            elif direction == 'a' or direction == 'A':
+            elif direction == 'A':
                 direction = 'West'
                 valid_direction = True
-            elif direction == 's' or direction == 'S':
+            elif direction == 'S':
                 direction = 'South'
                 valid_direction = True
-            elif direction == 'd' or direction == 'D':
+            elif direction == 'D':
                 direction = 'East'
                 valid_direction = True
         else:
