@@ -13,7 +13,7 @@ def test():
     room.move("W")
     # Entrance Hallway, Nothing
     print(room.name)
-    room.move("d")
+    room.move("D")
     player.grab_item(room.item)
     # Library, Spell Book
     print(room.name)

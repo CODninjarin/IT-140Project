@@ -1,4 +1,5 @@
 class Room:
+    # class variable assignments
     def __init__(self, name):
         self.name = name
         self.exits = []
@@ -62,6 +63,8 @@ class Room:
             if name not in self.map:
                 print('That adventurer may have something that can help you. He certainly won\'t be needing it back.')
         # Armory
+        # Has two doors, South(Weapon Stash) and East(Great Hall)
+        # Has the "Leather Armor" item
         if name == 'Armory':
             self.name = name
             self.exits = ['South', 'East']
@@ -71,6 +74,8 @@ class Room:
             if name not in self.map:
                 print('If you look around you might find something lighter you could use.')
         # Weapon Stash
+        # Has two doors, North(Armory) and one to the East that is blocked.
+        # Has the "Holy Golden Sword" item
         if name == 'Weapon Stash':
             self.name = name
             self.exits = ['North', 'East']
@@ -80,6 +85,8 @@ class Room:
             if name not in self.map:
                 print('There appears to be a faint glow behind a pile of swords.')
         # Bedroom Hallway
+        # Has four doors, North(King's Chamber), East(Bedroom), West(Queen's Chamber), and South(Great Hall)
+        # Has no item due to being a hallway
         if name == 'Bedroom Hallway':
             self.name = 'Bedroom Hallway'
             self.exits = ['North', 'South', 'East', 'West']
@@ -89,6 +96,8 @@ class Room:
             print('There are doorways in a 4 directions. You should probably check all the rooms before going through')
             print('the North door.')
         # Bedroom
+        # Has one door, West(Bedroom Hallway)
+        # Has the "Gold Cups" item
         if name == 'Bedroom':
             self.name = name
             self.exits = ['West']
@@ -98,6 +107,8 @@ class Room:
             if name not in self.map:
                 print('There may be some valuables hidden in the dust.')
         # Queen's Chamber
+        # Has one door, East(Bedroom Hallway)
+        # Has the "Fine Jewelry" item
         if name == 'Queen\'s Chamber':
             self.name = name
             self.exits = ['East']
@@ -107,16 +118,19 @@ class Room:
             if name not in self.map:
                 print('You see something sparkling near the dresser.')
         # Kings Chamber
+        # Has one door, South(Bedroom Hallway). This is not used in the game at this time.
+        # Has the "Necromancer's Note" item that the player obtains by winning the game
         if name == 'King\'s Chamber':
             self.name = name
             self.exits = ['South']
             self.item = 'Necromancer\'s Note'
-        print('\nTip: Press \'I\' to examine the room closer. You may find something of value.')
-        print('Tip: Use the \'WASD\' keys to move through doorway.\n')
         self.map.append(name)
 
+    # function to move the player to a new room
     def move(self, direction):
-        valid_direction = False
+        valid_direction = False  # variable to check if direction is a valid direction
+        # check if direction is one of the four directions and change it to the compass direction
+        # also sets valid_direction to true if the direction is valid
         if direction in self.directions:
             if direction == 'W':
                 direction = 'North'
@@ -130,8 +144,9 @@ class Room:
             elif direction == 'D':
                 direction = 'East'
                 valid_direction = True
-        else:
+        else:  # print statement for if direction is not a valid direction
             print('Invalid Entry')
+            # check if direction in the current rooms exits and set the new room if it is
         if direction in self.exits:
             if self.name == 'Entrance Hall':
                 if direction == 'North':
@@ -188,13 +203,46 @@ class Room:
                 if direction == 'East':
                     self.set_room('Bedroom Hallway')
         else:
-            if valid_direction:
-                print('There is no doorway in that direction.')
-
-    def set_name(self, new_name):
-        self.name = new_name
+            if valid_direction:  # if direction is valid, but not an exit, print no doorway in direction
+                print('There is no doorway to the {}.'.format(direction))
 
     # use the map to see the names of the rooms attached to the current room.
     def use_map(self):
+        print('\n')
         if self.name == 'Entrance Hall':
             print('The Entrance Hallway is to the North.')
+        if self.name == 'Entrance Hallway':
+            print('The Library is to the East.')
+            print('The Entrance Hall is to the south.')
+            print('The Weapons Stash is to the West, but it is blocked by debris.')
+            print('the Great Hall is to the North, but it is blocked by debris.')
+        if self.name == 'Library':
+            print('The Kitchen is to the North.')
+            print('The Entrance Hallway is to the West.')
+        if self.name == 'Kitchen':
+            print('The Great Hall is to the West.')
+            print('The Library is to the South')
+        if self.name == 'Great Hall':
+            print('The Kitchen is to the East.')
+            print('The Entrance Hallway is to the south.')
+            print('The Armory is to the West.')
+            print('the Bedroom Hallway is to the North.')
+        if self.name == 'Armory':
+            print('The Great Hall is to the East.')
+            print('The Weapon Stash is to the South')
+        if self.name == 'Weapon Stash':
+            print('The Armory is to the North.')
+            print('The Entrance Hallway is to the East')
+        if self.name == 'Bedroom Hallway':
+            print('The Queen\'s Chamber is to the West.')
+            print('The Great Hall is to the South')
+            print('The Bedroom is to the East.')
+            print('The King\'s Chamber is to the North')
+        if self.name == 'Bedroom':
+            print('The Bedroom Hallway is to the West.')
+        if self.name == 'Queen\'s Chamber':
+            print('The Bedroom Hallway is to the East.')
+        if self.name == 'King\'s Chamber':
+            print('The Bedroom Hallway is to the South')
+        print('\n')
+

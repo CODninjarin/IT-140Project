@@ -3,16 +3,20 @@ class Player:
         self.inv = []
 
     def grab_item(self, item):
-        if item != '':
-            if item not in self.inv:
+        if item != '':  # check if there is an item in the room or not
+            if item not in self.inv:  # check if the item is already in the players inventory
+                # if no, add to inventory and print description
                 self.inv.append(str(item))
                 print('You have collected the {}'.format(item))
                 self.item_desc(item)
             else:
+                # if yes, print that player has already collected it
                 print('You have already collected the {}'.format(item))
         else:
+            # if there is no item, print a statement saying there is no item
             print('There doesn\'t appear to be anything of interest.')
 
+    # function describing each item in the game
     def item_desc(self, item):
         if item == 'Map':
             print('It\'s a map of the castle, this will come in handy.')
@@ -47,5 +51,6 @@ class Player:
             print('The note says: \"I don\'t know what else I can do. I cannot live without you '
                   'my dear wife. My Queen. I will bring you back to me.\"')
 
+    # function to print the players inventory
     def show_inv(self):
         print('Inventory: {}'.format(self.inv))
